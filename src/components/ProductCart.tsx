@@ -13,8 +13,6 @@ interface ProductDataProps {
 }
 
 export function ProductCart() {
-  console.log(productData);
-
   return (
     <>
       {productData.map((product, index) => (
@@ -55,13 +53,13 @@ export function ProductCart() {
 
             <div className="flex gap-2 items-center justify-between">
               <div className="flex gap-1 bg-base-button justify-center items-center h-9 rounded-md">
-                <button className="text-purple-500 text-3xl p-2 hover:opacity-80">
+                <button className="text-purple-500 text-3xl px-2 hover:opacity-80">
                   -
                 </button>
                 <span className="text-base-title font-normal text-base leading-snug text-center">
                   {product.quantity}
                 </span>
-                <button className="text-purple-500 text-2xl p-2 hover:opacity-80">
+                <button className="text-purple-500 text-2xl px-2 hover:opacity-80">
                   +
                 </button>
               </div>
