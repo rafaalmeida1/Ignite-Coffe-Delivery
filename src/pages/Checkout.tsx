@@ -56,7 +56,7 @@ export function Checkout() {
 
   return (
     <form
-      className="mt-2 flex flex-col xl:flex-row items-center xl:items-start gap-8"
+      className="mt-2 flex flex-col xl:flex-row items-center md:items-start gap-8"
       onSubmit={handleSubmit(handleCreatePaymentForm)}
     >
       <section className="flex flex-col flex-wrap gap-3 rounded-md  w-full xl:w-3/4">

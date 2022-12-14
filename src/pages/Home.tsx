@@ -5,8 +5,8 @@ import { ProductCart } from "../components/ProductCart";
 export function Home() {
   return (
     <>
-      <main className="py-14 md:py-[104px] md:mb-8 flex items-center sm:flex-row flex-col gap-14 sm:h-[554px]">
-        <div className="flex flex-col">
+      <main className="py-14 md:py-[104px] mb-8 flex items-center xl:justify-between lg:flex-row flex-col gap-14 sm:h-[554px]">
+        <div className="flex flex-col w-3/5 lg:w-[588px]">
           <h1 className="text-3xl lg:text-4xl xl:text-5xl md:text-3xl text-base-title leading-snug">
             Encontre o café perfeito para qualquer hora do dia
           </h1>
@@ -51,12 +51,12 @@ export function Home() {
           </div>
         </div>
 
-        <img src={coffeBanner} alt="Coffe Banner Image" className="w-72 h-72 lg:w-auto lg:h-auto" />
+        <img src={coffeBanner} alt="Coffe Banner Image" className="w-60 h-60 lg:w-2/5 lg:h-auto" />
       </main>
 
-      <section className="md:mt-8 mb-24">
+      <section className="mt-8 mb-24 px-12">
         <h1 className="text-3xl text-base-subtitle leading-10">Nosso cafés</h1>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center md:gap-x-8 gap-y-10 mt-14">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-8 gap-y-10 mt-14">
           <ProductCart />
         </div>
       </section>

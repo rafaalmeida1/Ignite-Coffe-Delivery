@@ -16,7 +16,7 @@ export function ProductCart() {
   return (
     <>
       {productData.map((product, index) => (
-        <div className="flex flex-col items-center w-[256px] pb-10 bg-base-card rounded-tr-3xl rounded-bl-3xl">
+        <div className="flex flex-col items-center pb-10 bg-base-card rounded-tr-3xl rounded-bl-3xl">
           <img
             src={coffeImages[index].url}
             alt={`Coffe ${coffeImages[index]}`}
