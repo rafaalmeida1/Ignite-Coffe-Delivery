@@ -6,12 +6,14 @@ import {
   MapPinLine,
   Money,
 } from "phosphor-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ProductOnCart } from "../components/ProductOnCart";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 import * as zod from "zod";
 import { PaymentForm } from "../components/PaymentForm";
+import { CartContext } from "../context/CartContext";
+import { ProductProps } from "../reducers/cart/reducer";
 
 const paymentFormValidationSchema = zod.object({
   cep: zod.number(),
@@ -23,19 +25,10 @@ const paymentFormValidationSchema = zod.object({
   uf: zod.string(),
 });
 
-interface PaymentFormSchema {
-  cep: number;
-  rua: string;
-  number: number;
-  complemento?: string;
-  bairro: string;
-  cidade: string;
-  uf: string;
-}
-
 type PaymentFormData = zod.infer<typeof paymentFormValidationSchema>;
 
 export function Checkout() {
+  const {cart, total} = useContext(CartContext)
   const [typePay, setTypePay] = useState("");
 
   const paymentForm = useForm<PaymentFormData>({
@@ -140,8 +133,9 @@ export function Checkout() {
       <section className="flex flex-col flex-wrap gap-3 rounded-md w-full xl:w-2/4">
         <h1 className="text-lg font-bold leading-snug">Cafés selecionados</h1>
         <div className="bg-base-card p-10 rounded-tr-3xl rounded-bl-3xl">
-          <ProductOnCart />
-          <ProductOnCart />
+          {cart.map((item:ProductProps) => (
+            <ProductOnCart key={item.id} {...item} />
+          ))}
 
           <div className="flex flex-col gap-y-3">
             <div className="flex justify-between items-center">
@@ -149,7 +143,7 @@ export function Checkout() {
                 Total de itens
               </strong>
               <strong className="text-base-text font-normal leading-snug">
-                R$ 29,70
+                {String(total.toFixed(2)).replace('.', ',')}
               </strong>
             </div>
 
@@ -158,7 +152,7 @@ export function Checkout() {
                 Entrega
               </strong>
               <strong className="text-base-text font-normal leading-snug">
-                R$ 3,50
+                R$ {cart.length === 0 ? '0,00' : String(3.5.toFixed(2)).replace('.', ',')}
               </strong>
             </div>
 
@@ -167,7 +161,7 @@ export function Checkout() {
                 Total
               </strong>
               <strong className="text-xl text-base-subtitle font-bold leading-snug">
-                R$ 33,20
+                R$ {String((cart.length === 0 ? '0,00' : (total + 3.50).toFixed(2))).replace('.', ',')}
               </strong>
             </div>
           </div>

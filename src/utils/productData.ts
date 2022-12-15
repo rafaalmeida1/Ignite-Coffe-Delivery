@@ -15,6 +15,7 @@ import coffe14 from '../assets/coffe14.png'
 
 export const productData = [
   {
+    id: 1,
     name: "Expresso Tradicional",
     description: "O tradicional café feito com água quente e grão moídos",
     category: "Tradicional",
@@ -22,9 +23,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe1
   },
   {
+    id: 2,
     name: "Expresso Americano",
     description: "Expresso diluído, menos intenso que o tradicional",
     category: "Tradicional",
@@ -32,9 +35,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe2
   },
   {
+    id: 3,
     name: "Expresso Cremoso",
     description: "Café expresso tradicional com espuma cremosa",
     category: "Tradicional",
@@ -42,9 +47,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe3
   },
   {
+    id: 4,
     name: "Expresso Gelado",
     description: "Bebida preparada com café expresso e cubos de gelo",
     category: "Tradicional",
@@ -52,9 +59,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe4
   },
   {
+    id: 5,
     name: "Café com Leite",
     description: "Meio a meio de expresso tradicional com leite vaporizado",
     category: "Tradicional",
@@ -62,9 +71,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe5
   },
   {
+    id: 6,
     name: "Latte",
     description: "Uma dose de café expresso com o dobro de leite e espuma cremosa",
     category: "Tradicional",
@@ -72,9 +83,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe6
   },
   {
+    id: 7,
     name: "Capuccino",
     description: "Bebida com canela feita de doses iguais de café, leite e espuma",
     category: "Tradicional",
@@ -82,9 +95,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe7
   },
   {
+    id: 8,
     name: "Macchiato",
     description: "Café expresso misturado com um pouco de leite quente e espuma",
     category: "Tradicional",
@@ -92,9 +107,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe8
   },
   {
+    id: 9,
     name: "Mocaccino",
     description: "Café expresso com calda de chocolate, pouco leite e espuma",
     category: "Tradicional",
@@ -102,9 +119,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe9
   },
   {
+    id: 10,
     name: "Chocolate Quente",
     description: "Bebida feita com chocolate dissolvido no leite quente e café",
     category: "Especial",
@@ -112,9 +131,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe10
   },
   {
+    id: 11,
     name: "Cubano",
     description: "Drink gelado de café expresso com rum, creme de leite e hortelã",
     category: "Especial",
@@ -122,9 +143,11 @@ export const productData = [
     anothercategory: "Gelado",
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe11
   },
   {
+    id: 12,
     name: "Havaiano",
     description: "Bebida adocicada preparada com café e leite de coco",
     category: "Especial",
@@ -132,9 +155,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe12
   },
   {
+    id: 13,
     name: "Árabe",
     description: "Bebida preparada com grãos de café árabe e especiarias",
     category: "Especial",
@@ -142,9 +167,11 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
+    quantity: 1,
+    image: coffe13
   },
   {
+    id: 14,
     name: "Irlandês",
     description: "Bebida a base de café, uísque irlandês, açúcar e chantilly",
     category: "Especial",
@@ -152,51 +179,7 @@ export const productData = [
     anothercategory: null,
     price: 9.90,
     inventory: 8,
-    quantity: 1
-  },
-]
-
-export const coffeImages = [
-  {
-    url: coffe1
-  },
-  {
-    url: coffe2
-  },
-  {
-    url: coffe3
-  },
-  {
-    url: coffe4
-  },
-  {
-    url: coffe5
-  },
-  {
-    url: coffe6
-  },
-  {
-    url: coffe7
-  },
-  {
-    url: coffe8
-  },
-  {
-    url: coffe9
-  },
-  {
-    url: coffe10
-  },
-  {
-    url: coffe11
-  },
-  {
-    url: coffe12
-  },
-  {
-    url: coffe13
-  },
-  {
-    url: coffe14
+    quantity: 1,
+    image: coffe14
   },
 ]

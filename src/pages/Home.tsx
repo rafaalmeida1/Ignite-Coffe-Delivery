@@ -1,6 +1,7 @@
 import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react";
 import coffeBanner from "../assets/coffeBanner.png";
 import { ProductCart } from "../components/ProductCart";
+import { productData } from "../utils/productData";
 
 export function Home() {
   return (
@@ -57,7 +58,9 @@ export function Home() {
       <section className="mt-8 mb-24 px-12">
         <h1 className="text-3xl text-base-subtitle leading-10">Nosso cafés</h1>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-8 gap-y-10 mt-14">
-          <ProductCart />
+          {productData.map((coffeItem, index) => (
+            <ProductCart index={index} product={coffeItem} />
+          ))}
         </div>
       </section>
     </>
