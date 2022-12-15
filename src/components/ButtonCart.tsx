@@ -5,7 +5,7 @@ import { ProductProps } from "../reducers/cart/reducer";
 
 interface ButtonProps {
   activeButton: "primary" | "secondary";
-  product: ProductProps
+  product?: ProductProps
 }
 
 export function ButtonCart({ activeButton, product }: ButtonProps) {
