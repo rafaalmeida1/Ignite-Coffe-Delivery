@@ -143,7 +143,7 @@ export function Checkout() {
                 Total de itens
               </strong>
               <strong className="text-base-text font-normal leading-snug">
-                {String(total.toFixed(2)).replace('.', ',')}
+                R$ {String(total.toFixed(2)).replace('.', ',')}
               </strong>
             </div>
 
