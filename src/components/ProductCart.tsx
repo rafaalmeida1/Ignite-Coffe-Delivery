@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { ProductProps } from "../reducers/cart/reducer";
 import { ButtonCart } from "./ButtonCart";
@@ -9,21 +9,27 @@ interface ProductCartProps {
 }
 
 export function ProductCart({ index, product }: ProductCartProps) {
-  const {setNewQuantity} = useContext(CartContext)
+  const { setNewQuantity, cart } = useContext(CartContext);
 
   const increaseQuantityProductBeforeCart = () => {
-    product.quantity += 1 
-    setNewQuantity()
-  }
+    if (product.quantity < product.inventory) {
+      product.quantity += 1;
+      setNewQuantity();
+    }
+    return product.quantity;
+  };
 
   const decreaseQuantityProductBeforeCart = () => {
-    product.quantity -= 1 
-    setNewQuantity()
-  }
-
+    if (product.quantity > 1) {
+      product.quantity -= 1;
+      setNewQuantity();
+    }
+    return product.quantity;
+  };
+  
   return (
     <>
-      <div className="flex flex-col items-center pb-10 bg-base-card rounded-tr-3xl rounded-bl-3xl">
+      <div className="flex flex-col items-center w-[250px] pb-10 bg-base-card rounded-tr-3xl rounded-bl-3xl">
         <img
           src={product.image}
           alt={`Coffe ${product.image[index]}`}
@@ -48,11 +54,11 @@ export function ProductCart({ index, product }: ProductCartProps) {
         <h1 className="p-5 text-base-subtitle text-xl leading-snug font-bold">
           {product.name}
         </h1>
-        <p className="text-base-label text-sm leading-snug text-center px-5">
+        <p className="text-base-label text-xs leading-snug text-center px-5">
           {product.description}
         </p>
 
-        <div className="flex justify-between items-center px-6 gap-6 mt-8">
+        <div className="flex justify-between items-center px-6 gap-6 mt-8 bottom-0">
           <div className="flex items-center text-base-text gap-1">
             <span className="text-sm font-normal">R$</span>
             <h1 className="font-bold text-2xl">

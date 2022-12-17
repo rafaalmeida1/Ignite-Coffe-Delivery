@@ -55,11 +55,11 @@ export function Home() {
         <img src={coffeBanner} alt="Coffe Banner Image" className="w-60 h-60 lg:w-2/5 lg:h-auto" />
       </main>
 
-      <section className="mt-8 mb-24 px-12">
+      <section className="mt-8 mb-24 px-12 md:px-0">
         <h1 className="text-3xl text-base-subtitle leading-10">Nosso cafés</h1>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-8 gap-y-10 mt-14">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center md:gap-x-8 gap-y-10 mt-14">
           {productData.map((coffeItem, index) => (
-            <ProductCart index={index} product={coffeItem} />
+            <ProductCart key={index} index={index} product={coffeItem} />
           ))}
         </div>
       </section>

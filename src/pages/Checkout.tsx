@@ -5,6 +5,7 @@ import {
   CurrencyDollar,
   MapPinLine,
   Money,
+  Spinner,
 } from "phosphor-react";
 import { useContext, useState } from "react";
 import { ProductOnCart } from "../components/ProductOnCart";
@@ -14,12 +15,16 @@ import * as zod from "zod";
 import { PaymentForm } from "../components/PaymentForm";
 import { CartContext } from "../context/CartContext";
 import { ProductProps } from "../reducers/cart/reducer";
+import { useNavigate } from "react-router-dom";
+import { createNewPurchase } from "../reducers/checkoutForm/action";
+import { CheckoutFormContext } from "../context/CheckoutFormContext";
+import produce from "immer";
 
 const paymentFormValidationSchema = zod.object({
-  cep: zod.number(),
+  cep: zod.number().min(1),
   rua: zod.string(),
   number: zod.number(),
-  complemento: zod.string().optional(),
+  complemento: zod.string(),
   bairro: zod.string(),
   cidade: zod.string(),
   uf: zod.string(),
@@ -28,23 +33,40 @@ const paymentFormValidationSchema = zod.object({
 type PaymentFormData = zod.infer<typeof paymentFormValidationSchema>;
 
 export function Checkout() {
-  const {cart, total} = useContext(CartContext)
   const [typePay, setTypePay] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { cart, total } = useContext(CartContext);
+  const { dispatch } = useContext(CheckoutFormContext);
+  const navigate = useNavigate();
 
   const paymentForm = useForm<PaymentFormData>({
     resolver: zodResolver(paymentFormValidationSchema),
   });
 
-  const { handleSubmit, watch, reset } = paymentForm;
-  function handleCreatePaymentForm(data: PaymentFormData) {
-    console.log(data, typePay);
+  const { handleSubmit, watch, reset, register } = paymentForm;
 
-    reset();
+  function handleCreatePaymentForm(data: PaymentFormData) {
+    setLoading(true);
+    const newPurchase: PaymentFormData = {
+      cep: data.cep,
+      rua: data.rua,
+      number: data.number,
+      complemento: data.complemento,
+      bairro: data.bairro,
+      cidade: data.cidade,
+      uf: data.uf,
+    };
+
+    const paymentMethod = typePay;
+
+    dispatch(createNewPurchase(newPurchase, paymentMethod));
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/success");
+    }, 1000);
   }
 
-  const firstInputInForm = watch(
-    "cep" && "rua" && "number" && "bairro" && "cidade" && "uf"
-  );
+  const firstInputInForm = watch("cep");
   const isSubmitDisabled = !firstInputInForm;
 
   return (
@@ -133,7 +155,7 @@ export function Checkout() {
       <section className="flex flex-col flex-wrap gap-3 rounded-md w-full xl:w-2/4">
         <h1 className="text-lg font-bold leading-snug">Cafés selecionados</h1>
         <div className="bg-base-card p-10 rounded-tr-3xl rounded-bl-3xl">
-          {cart.map((item:ProductProps) => (
+          {cart.map((item: ProductProps) => (
             <ProductOnCart key={item.id} {...item} />
           ))}
 
@@ -143,7 +165,7 @@ export function Checkout() {
                 Total de itens
               </strong>
               <strong className="text-base-text font-normal leading-snug">
-                R$ {String(total.toFixed(2)).replace('.', ',')}
+                R$ {String(total.toFixed(2)).replace(".", ",")}
               </strong>
             </div>
 
@@ -152,7 +174,10 @@ export function Checkout() {
                 Entrega
               </strong>
               <strong className="text-base-text font-normal leading-snug">
-                R$ {cart.length === 0 ? '0,00' : String(3.5.toFixed(2)).replace('.', ',')}
+                R${" "}
+                {cart.length === 0
+                  ? "0,00"
+                  : String((3.5).toFixed(2)).replace(".", ",")}
               </strong>
             </div>
 
@@ -161,7 +186,10 @@ export function Checkout() {
                 Total
               </strong>
               <strong className="text-xl text-base-subtitle font-bold leading-snug">
-                R$ {String((cart.length === 0 ? '0,00' : (total + 3.50).toFixed(2))).replace('.', ',')}
+                R${" "}
+                {String(
+                  cart.length === 0 ? "0,00" : (total + 3.5).toFixed(2)
+                ).replace(".", ",")}
               </strong>
             </div>
           </div>
@@ -169,14 +197,18 @@ export function Checkout() {
           <button
             type="submit"
             className={classNames(
-              "w-full rounded-md bg-yellow-500 py-3 px-2 text-base-white mt-9",
+              "w-full rounded-md bg-yellow-500 py-3 px-2 text-base-white mt-9 flex items-center justify-center",
               {
                 "opacity-50 cursor-not-allowed": isSubmitDisabled,
                 "opacity-100 hover:bg-yellow-800": !isSubmitDisabled,
               }
             )}
           >
-            CONFIRMAR PEDIDO
+            {!loading ? (
+              "CONFIRMAR PEDIDO"
+            ) : (
+              <Spinner size={23} className="animate-spin" />
+            )}
           </button>
         </div>
       </section>

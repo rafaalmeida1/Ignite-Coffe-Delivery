@@ -28,7 +28,7 @@ export function cartReducer(state: CartState, action: any) {
         if (coffeeAlreadyExistsInCart < 0) {
           draft.cart.push(action.payload.newProduct);
         } else {
-          draft.cart[coffeeAlreadyExistsInCart].quantity += 1;
+          draft.cart[coffeeAlreadyExistsInCart].quantity = action.payload.newProduct.quantity + draft.cart[coffeeAlreadyExistsInCart].quantity;
         }
       });
 
@@ -41,7 +41,7 @@ export function cartReducer(state: CartState, action: any) {
       })
     case ActionTypes.DECREASE_PRODUCT_QUANTITY:
       return produce(state, (draft) => {
-        if(draft.cart[coffeeAlreadyExistsInCart].quantity === 0) return state
+        if(draft.cart[coffeeAlreadyExistsInCart].quantity === 1) return state
         if(coffeeAlreadyExistsInCart >= 0) {
           draft.cart[coffeeAlreadyExistsInCart].quantity -= 1;
         }

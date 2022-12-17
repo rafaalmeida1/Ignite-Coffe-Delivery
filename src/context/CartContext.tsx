@@ -16,7 +16,7 @@ import { cartReducer, ProductProps } from "../reducers/cart/reducer";
 
 interface CartContextData {
   cart: ProductProps[];
-  handleToCart: (product: any) => void;
+  handleToCart: (product:any) => void;
   total: number;
   deleteProduct: (product: ProductProps) => void;
   increaseQuantity: (product: ProductProps) => void;
