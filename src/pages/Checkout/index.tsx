@@ -8,17 +8,18 @@ import {
   Spinner,
 } from "phosphor-react";
 import { useContext, useState } from "react";
-import { ProductOnCart } from "../components/ProductOnCart";
+import { ProductOnCart } from "../../components/ProductOnCart";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 import * as zod from "zod";
-import { PaymentForm } from "../components/PaymentForm";
-import { CartContext } from "../context/CartContext";
-import { ProductProps } from "../reducers/cart/reducer";
+import { CartContext } from "../../context/CartContext";
+import { ProductProps } from "../../reducers/cart/reducer";
 import { useNavigate } from "react-router-dom";
-import { createNewPurchase } from "../reducers/checkoutForm/action";
-import { CheckoutFormContext } from "../context/CheckoutFormContext";
+import { createNewPurchase } from "../../reducers/checkoutForm/action";
+import { CheckoutFormContext } from "../../context/CheckoutFormContext";
 import produce from "immer";
+import { PaymentForm } from "./components/PaymentForm";
+import { SectionPaymentMethod } from "./components/SectionPaymentMethod";
 
 const paymentFormValidationSchema = zod.object({
   cep: zod.number().min(1),
@@ -38,6 +39,10 @@ export function Checkout() {
   const { cart, total } = useContext(CartContext);
   const { dispatch } = useContext(CheckoutFormContext);
   const navigate = useNavigate();
+
+  const handleSetTypePay = (paymentMethod: string) => {
+    setTypePay(paymentMethod);
+  }
 
   const paymentForm = useForm<PaymentFormData>({
     resolver: zodResolver(paymentFormValidationSchema),
@@ -105,50 +110,7 @@ export function Checkout() {
             </div>
           </div>
 
-          <div className="flex gap-3 ">
-            <button
-              type="button"
-              onClick={() => setTypePay("credit")}
-              className={classNames(
-                "w-1/3 flex items-center p-4 gap-3 border hover:bg-base-hover rounded-md text-sm text-base-text hover:text-base-subtitle leading-relaxed",
-                {
-                  "bg-purple-300 border-purple-500": typePay === "credit",
-                  "bg-base-button": typePay !== "credit",
-                }
-              )}
-            >
-              <CreditCard size={16} className="text-purple-500" />
-              Cartão de Crédito
-            </button>
-            <button
-              type="button"
-              onClick={() => setTypePay("debit")}
-              className={classNames(
-                "w-1/3 flex items-center p-4 gap-3 border hover:bg-base-hover rounded-md text-sm text-base-text hover:text-base-subtitle leading-relaxed",
-                {
-                  "bg-purple-300 border-purple-500": typePay === "debit",
-                  "bg-base-button": typePay !== "debit",
-                }
-              )}
-            >
-              <Bank size={16} className="text-purple-500" />
-              Cartão de Débito
-            </button>
-            <button
-              type="button"
-              onClick={() => setTypePay("money")}
-              className={classNames(
-                "w-1/3 flex items-center p-4 gap-3 border hover:bg-base-hover rounded-md text-sm text-base-text hover:text-base-subtitle leading-relaxed",
-                {
-                  "bg-purple-300 border-purple-500": typePay === "money",
-                  "bg-base-button": typePay !== "money",
-                }
-              )}
-            >
-              <Money size={16} className="text-purple-500" />
-              Dinheiro
-            </button>
-          </div>
+          <SectionPaymentMethod typePay={typePay} onSetTypePay={handleSetTypePay} />
         </div>
       </section>
 
