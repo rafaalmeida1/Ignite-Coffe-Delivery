@@ -1,5 +1,6 @@
 import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react";
 import coffeBanner from "../assets/coffeBanner.png";
+import { ButtonScroll } from "../components/ButtonScroll";
 import { ProductCart } from "../components/ProductCart";
 import { productData } from "../utils/productData";
 
@@ -63,6 +64,8 @@ export function Home() {
           ))}
         </div>
       </section>
+
+      <ButtonScroll />
     </>
   );
 }
